@@ -1,4 +1,7 @@
 package com.ngqabutho.headerscanner.model;
 
-public class Severity {
+public enum Severity {
+    HIGH,
+    MEDIUM,
+    LOW
 }

@@ -1,6 +1,6 @@
 package com.ngqabutho.headerscanner.model;
 
-public record HeaderFinding (
+public record HeaderFinding(
         HeaderRule rule,
         Status status,
         String actualValue,

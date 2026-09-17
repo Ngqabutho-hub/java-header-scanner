@@ -328,4 +328,125 @@ public class ScanReportTest {
         assertEquals('A', grade);
     }
 
+    @Test
+    void gradeWhenScoreIsEqualToNine() {
+        HeaderRule rule = new HeaderRule(
+                "test-header",
+                Severity.HIGH,
+                "test description",
+                "test recommendation",
+                null
+        );
+
+        List<HeaderFinding> findings = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            HeaderFinding finding = new HeaderFinding(
+                    rule,
+                    Status.OK,
+                    "test-value",
+                    "test"
+            );
+            findings.add(finding);
+        }
+
+        ScanReport report = new ScanReport(
+                "https://example.com",
+                "https://example.com",
+                200,
+                findings
+        );
+        char grade = report.grade();
+
+        assertEquals('B', grade);
+    }
+
+    @Test
+    void gradeWhenScoreIsEqualToSix() {
+        HeaderRule rule = new HeaderRule(
+                "test-header",
+                Severity.HIGH,
+                "test description",
+                "test recommendation",
+                null
+        );
+
+        List<HeaderFinding> findings = new ArrayList<>();
+        for (int i = 0; i < 2; i++) {
+            HeaderFinding finding = new HeaderFinding(
+                    rule,
+                    Status.OK,
+                    "test-value",
+                    "test"
+            );
+            findings.add(finding);
+        }
+
+        ScanReport report = new ScanReport(
+                "https://example.com",
+                "https://example.com",
+                200,
+                findings
+        );
+        char grade = report.grade();
+
+        assertEquals('C', grade);
+    }
+
+    @Test
+    void gradeWhenScoreIsEqualToThree() {
+        HeaderRule rule = new HeaderRule(
+                "test-header",
+                Severity.HIGH,
+                "test description",
+                "test recommendation",
+                null
+        );
+
+        HeaderFinding finding = new HeaderFinding(
+                rule,
+                Status.OK,
+                "test-value",
+                "test"
+        );
+        List<HeaderFinding> findings = List.of(finding);
+
+        ScanReport report = new ScanReport(
+                "https://example.com",
+                "https://example.com",
+                200,
+                findings
+        );
+        char grade = report.grade();
+
+        assertEquals('D', grade);
+    }
+
+    @Test
+    void gradeWhenScoreIsEqualToTwo() {
+        HeaderRule rule = new HeaderRule(
+                "test-header",
+                Severity.MEDIUM,
+                "test description",
+                "test recommendation",
+                null
+        );
+
+        HeaderFinding finding = new HeaderFinding(
+                rule,
+                Status.OK,
+                "test-value",
+                "test"
+        );
+        List<HeaderFinding> findings = List.of(finding);
+
+        ScanReport report = new ScanReport(
+                "https://example.com",
+                "https://example.com",
+                200,
+                findings
+        );
+        char grade = report.grade();
+
+        assertEquals('F', grade);
+    }
 }

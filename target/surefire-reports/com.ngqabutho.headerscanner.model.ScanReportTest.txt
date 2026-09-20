@@ -1,4 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.ngqabutho.headerscanner.model.ScanReportTest
 -------------------------------------------------------------------------------
+<<<<<<< Updated upstream
 Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec
+=======
+Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.506 s -- in com.ngqabutho.headerscanner.model.ScanReportTest
+>>>>>>> Stashed changes

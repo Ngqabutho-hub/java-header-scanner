@@ -1,4 +1,10 @@
 package com.ngqabutho.headerscanner.persistence;
 
-public class ScanHistoryRepository {
+import java.util.List;
+
+public interface ScanHistoryRepository {
+
+    void save(ScanRecord record);
+
+    List<ScanRecord> findAll();
 }

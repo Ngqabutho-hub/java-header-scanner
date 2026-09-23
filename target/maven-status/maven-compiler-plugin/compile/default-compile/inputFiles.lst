@@ -9,6 +9,7 @@ C:\Users\Ngqabutho\Documents\java-header-scanner\src\main\java\com\ngqabutho\hea
 C:\Users\Ngqabutho\Documents\java-header-scanner\src\main\java\com\ngqabutho\headerscanner\model\Status.java
 C:\Users\Ngqabutho\Documents\java-header-scanner\src\main\java\com\ngqabutho\headerscanner\persistence\ScanHistoryRepository.java
 C:\Users\Ngqabutho\Documents\java-header-scanner\src\main\java\com\ngqabutho\headerscanner\persistence\ScanRecord.java
+C:\Users\Ngqabutho\Documents\java-header-scanner\src\main\java\com\ngqabutho\headerscanner\persistence\ScanRecordMapper.java
 C:\Users\Ngqabutho\Documents\java-header-scanner\src\main\java\com\ngqabutho\headerscanner\persistence\SqliteScanHistoryRepository.java
 C:\Users\Ngqabutho\Documents\java-header-scanner\src\main\java\com\ngqabutho\headerscanner\render\ReportRenderer.java
 C:\Users\Ngqabutho\Documents\java-header-scanner\src\main\java\com\ngqabutho\headerscanner\rules\RuleSet.java

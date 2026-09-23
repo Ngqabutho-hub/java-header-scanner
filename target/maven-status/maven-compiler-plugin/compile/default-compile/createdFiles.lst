@@ -1,3 +1,4 @@
+com\ngqabutho\headerscanner\persistence\ScanRecordMapper.class
 com\ngqabutho\headerscanner\persistence\SqliteScanHistoryRepository.class
 com\ngqabutho\headerscanner\scan\ScanResult.class
 com\ngqabutho\headerscanner\persistence\ScanHistoryRepository.class

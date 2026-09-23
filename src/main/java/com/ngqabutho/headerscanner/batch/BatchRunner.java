@@ -1,6 +1,9 @@
 package com.ngqabutho.headerscanner.batch;
 
 import com.ngqabutho.headerscanner.model.ScanReport;
+import com.ngqabutho.headerscanner.persistence.ScanHistoryRepository;
+import com.ngqabutho.headerscanner.persistence.ScanRecord;
+import com.ngqabutho.headerscanner.persistence.ScanRecordMapper;
 import com.ngqabutho.headerscanner.scan.ScanFailure;
 import com.ngqabutho.headerscanner.scan.ScanResult;
 import com.ngqabutho.headerscanner.scan.ScanSuccess;
@@ -18,6 +21,11 @@ import java.util.concurrent.Future;
 public class BatchRunner {
 
     private final Scanner scanner = new Scanner();
+    private final ScanHistoryRepository repository;
+
+    public BatchRunner(ScanHistoryRepository repository){
+        this.repository = repository;
+    }
 
     public List<ScanResult> scanAll(List<String> urls, Duration timeout) {
         try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
@@ -29,6 +37,8 @@ public class BatchRunner {
                 Future<ScanResult> future = executor.submit(() -> {
                     try {
                         ScanReport report = scanner.scan(url, timeout);
+                        ScanRecord record = ScanRecordMapper.from(report);
+                        repository.save(record);
                         return new ScanSuccess(report);
                     } catch (Exception e) {
                         return new ScanFailure(url, e);

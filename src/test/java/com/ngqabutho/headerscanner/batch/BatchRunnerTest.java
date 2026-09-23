@@ -33,12 +33,14 @@ public class BatchRunnerTest {
                     "http://localhost:" + port + "/"
             );
 
-            BatchRunner batchRunner = new BatchRunner();
+            FakeScanHistoryRepository repository = new FakeScanHistoryRepository();
+            BatchRunner batchRunner = new BatchRunner(repository);
             List<ScanResult> results = batchRunner.scanAll(urls, Duration.ofSeconds(5));
 
             assertEquals(2, results.size());
             assertInstanceOf(ScanSuccess.class, results.get(0));
             assertInstanceOf(ScanSuccess.class, results.get(1));
+            assertEquals(2, repository.findAll().size());
 
         }finally {
             server.stop(0);
@@ -64,12 +66,14 @@ public class BatchRunnerTest {
                     "not-a-valid-url"
             );
 
-            BatchRunner batchRunner = new BatchRunner();
+            FakeScanHistoryRepository repository = new FakeScanHistoryRepository();
+            BatchRunner batchRunner = new BatchRunner(repository);
             List<ScanResult> results = batchRunner.scanAll(urls, Duration.ofSeconds(5));
 
             assertEquals(2, results.size());
             assertInstanceOf(ScanSuccess.class, results.get(0));
             assertInstanceOf(ScanFailure.class, results.get(1));
+            assertEquals(1, repository.findAll().size());
 
         }finally {
             server.stop(0);

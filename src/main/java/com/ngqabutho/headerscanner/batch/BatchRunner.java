@@ -10,6 +10,7 @@ import com.ngqabutho.headerscanner.scan.ScanSuccess;
 import com.ngqabutho.headerscanner.scan.Scanner;
 
 
+import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,12 @@ public class BatchRunner {
                         ScanRecord record = ScanRecordMapper.from(report);
                         repository.save(record);
                         return new ScanSuccess(report);
-                    } catch (Exception e) {
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        return new ScanFailure(url, e);
+                    } catch (IOException e) {
+                        return new ScanFailure(url, e);
+                    }catch (IllegalArgumentException e) {
                         return new ScanFailure(url, e);
                     }
                 });

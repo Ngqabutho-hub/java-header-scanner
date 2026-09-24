@@ -12,41 +12,41 @@ public record ScanReport(
     public int score(){
         int score = 0;
 
-        for (HeaderFinding finding: findings){
-            Status status = finding.status();
-            Severity severity = finding.rule().severity();
+        for (HeaderFinding finding : findings) {
 
-            if (severity.equals(Severity.HIGH)){
-                if (status.equals(Status.OK)){
-                    score += 3;
-                } else if (status.equals(Status.WEAK)){
-                    score += 1;
-                }
-            } else if (severity.equals(Severity.MEDIUM)){
-                if (status.equals(Status.OK)){
-                    score += 2;
-                } else if (status.equals(Status.WEAK)){
-                    score += 1;
-                }
-            }else{
-                if (status.equals(Status.OK)){
-                    score += 1;
-                }
+            Severity severity = finding.rule().severity();
+            Status status = finding.status();
+
+            int weight;
+
+            if (severity == Severity.HIGH) {
+                weight = 30;
+            } else if (severity == Severity.MEDIUM) {
+                weight = 15;
+            } else {
+                weight = 5;
+            }
+
+            if (status == Status.OK) {
+                score += weight;
+            } else if (status == Status.WEAK) {
+                score += weight / 2;
             }
         }
+
         return score;
     }
     
     public char grade() {
         int score = score();
 
-        if (score >= 12){
+        if (score >= 90) {
             return 'A';
-        } else if (score >= 9){
+        } else if (score >= 80) {
             return 'B';
-        } else if (score >= 6){
+        } else if (score >= 70) {
             return 'C';
-        } else if (score >= 3){
+        } else if (score >= 60) {
             return 'D';
         } else {
             return 'F';

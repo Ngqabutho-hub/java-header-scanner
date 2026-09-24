@@ -1,0 +1,8 @@
+com\ngqabutho\headerscanner\render\ReportRendererTest.class
+com\ngqabutho\headerscanner\scan\EvaluatorTest.class
+com\ngqabutho\headerscanner\batch\BatchRunnerTest.class
+com\ngqabutho\headerscanner\batch\FakeScanHistoryRepository.class
+com\ngqabutho\headerscanner\rules\RuleSetTest.class
+com\ngqabutho\headerscanner\model\ScanReportTest.class
+com\ngqabutho\headerscanner\persistence\SqliteScanHistoryRepositoryTest.class
+com\ngqabutho\headerscanner\scan\ScannerTest.class

@@ -9,7 +9,7 @@ import java.util.List;
 public class ScanReportTest {
 
     @Test
-    void highSeverityOkGetsThreePoints() {
+    void highSeverityOkGetsThirtyPoints() {
         HeaderRule rule = new HeaderRule(
                 "test-Header",
                 Severity.HIGH,
@@ -36,11 +36,11 @@ public class ScanReportTest {
 
         int result = report.score();
 
-        assertEquals(3, result);
+        assertEquals(30, result);
     }
 
     @Test
-    void highSeverityWeakGetsOnePoint() {
+    void highSeverityWeakGetsHalfPoints() {
         HeaderRule rule = new HeaderRule(
                 "test-header",
                 Severity.HIGH,
@@ -68,7 +68,7 @@ public class ScanReportTest {
 
         int result = report.score();
 
-        assertEquals(1, result);
+        assertEquals(15, result);
     }
 
     @Test
@@ -104,7 +104,7 @@ public class ScanReportTest {
     }
 
     @Test
-    void mediumSeverityOkGetsTwoPoints() {
+    void mediumSeverityOkGetsFifteenPoints() {
         HeaderRule rule = new HeaderRule(
                 "test-header",
                 Severity.MEDIUM,
@@ -132,11 +132,11 @@ public class ScanReportTest {
 
         int result = report.score();
 
-        assertEquals(2, result);
+        assertEquals(15, result);
     }
 
     @Test
-    void mediumSeverityWeakGetsOnePoint() {
+    void mediumSeverityWeakGetsSevenPoints() {
         HeaderRule rule = new HeaderRule(
                 "test-header",
                 Severity.MEDIUM,
@@ -164,7 +164,7 @@ public class ScanReportTest {
 
         int result = report.score();
 
-        assertEquals(1, result);
+        assertEquals(7, result);
     }
 
     @Test
@@ -200,7 +200,7 @@ public class ScanReportTest {
     }
 
     @Test
-    void lowSeverityOkGetsOnePoint() {
+    void lowSeverityOkGetsFivePoints() {
         HeaderRule rule = new HeaderRule(
                 "test-header",
                 Severity.LOW,
@@ -228,11 +228,11 @@ public class ScanReportTest {
 
         int result = report.score();
 
-        assertEquals(1, result);
+        assertEquals(5, result);
     }
 
     @Test
-    void lowSeverityWeakGetsNoPoints() {
+    void lowSeverityWeakGetsTwoPoints() {
         HeaderRule rule = new HeaderRule(
                 "test-header",
                 Severity.LOW,
@@ -255,12 +255,11 @@ public class ScanReportTest {
                 "https://example.com",
                 200,
                 findings
-
         );
 
         int result = report.score();
 
-        assertEquals(0, result);
+        assertEquals(2, result);
     }
 
     @Test
@@ -296,148 +295,40 @@ public class ScanReportTest {
     }
 
     @Test
-    void gradeWhenScoreGreaterThanEleven() {
-        HeaderRule rule = new HeaderRule(
-                "test-header",
+    void gradeWhenScoreIsOneHundred() {
+
+        HeaderRule highRule = new HeaderRule(
+                "high-header",
                 Severity.HIGH,
                 "test description",
                 "test recommendation",
                 null
         );
 
-        List<HeaderFinding> findings = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            HeaderFinding finding = new HeaderFinding(
-                    rule,
-                    Status.OK,
-                    "test-value",
-                    "test"
-            );
-            findings.add(finding);
-        }
-
-        ScanReport report = new ScanReport(
-                "https://example.com",
-                "https://example.com",
-                200,
-                findings
-        );
-
-        char grade = report.grade();
-
-        assertEquals('A', grade);
-    }
-
-    @Test
-    void gradeWhenScoreIsEqualToNine() {
-        HeaderRule rule = new HeaderRule(
-                "test-header",
-                Severity.HIGH,
-                "test description",
-                "test recommendation",
-                null
-        );
-
-        List<HeaderFinding> findings = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            HeaderFinding finding = new HeaderFinding(
-                    rule,
-                    Status.OK,
-                    "test-value",
-                    "test"
-            );
-            findings.add(finding);
-        }
-
-        ScanReport report = new ScanReport(
-                "https://example.com",
-                "https://example.com",
-                200,
-                findings
-        );
-        char grade = report.grade();
-
-        assertEquals('B', grade);
-    }
-
-    @Test
-    void gradeWhenScoreIsEqualToSix() {
-        HeaderRule rule = new HeaderRule(
-                "test-header",
-                Severity.HIGH,
-                "test description",
-                "test recommendation",
-                null
-        );
-
-        List<HeaderFinding> findings = new ArrayList<>();
-        for (int i = 0; i < 2; i++) {
-            HeaderFinding finding = new HeaderFinding(
-                    rule,
-                    Status.OK,
-                    "test-value",
-                    "test"
-            );
-            findings.add(finding);
-        }
-
-        ScanReport report = new ScanReport(
-                "https://example.com",
-                "https://example.com",
-                200,
-                findings
-        );
-        char grade = report.grade();
-
-        assertEquals('C', grade);
-    }
-
-    @Test
-    void gradeWhenScoreIsEqualToThree() {
-        HeaderRule rule = new HeaderRule(
-                "test-header",
-                Severity.HIGH,
-                "test description",
-                "test recommendation",
-                null
-        );
-
-        HeaderFinding finding = new HeaderFinding(
-                rule,
-                Status.OK,
-                "test-value",
-                "test"
-        );
-        List<HeaderFinding> findings = List.of(finding);
-
-        ScanReport report = new ScanReport(
-                "https://example.com",
-                "https://example.com",
-                200,
-                findings
-        );
-        char grade = report.grade();
-
-        assertEquals('D', grade);
-    }
-
-    @Test
-    void gradeWhenScoreIsEqualToTwo() {
-        HeaderRule rule = new HeaderRule(
-                "test-header",
+        HeaderRule mediumRule = new HeaderRule(
+                "medium-header",
                 Severity.MEDIUM,
                 "test description",
                 "test recommendation",
                 null
         );
 
-        HeaderFinding finding = new HeaderFinding(
-                rule,
-                Status.OK,
-                "test-value",
-                "test"
+        HeaderRule lowRule = new HeaderRule(
+                "low-header",
+                Severity.LOW,
+                "test description",
+                "test recommendation",
+                null
         );
-        List<HeaderFinding> findings = List.of(finding);
+
+        List<HeaderFinding> findings = List.of(
+                new HeaderFinding(highRule, Status.OK, "value", "test"),
+                new HeaderFinding(highRule, Status.OK, "value", "test"),
+                new HeaderFinding(mediumRule, Status.OK, "value", "test"),
+                new HeaderFinding(mediumRule, Status.OK, "value", "test"),
+                new HeaderFinding(lowRule, Status.OK, "value", "test"),
+                new HeaderFinding(lowRule, Status.OK, "value", "test")
+        );
 
         ScanReport report = new ScanReport(
                 "https://example.com",
@@ -445,8 +336,128 @@ public class ScanReportTest {
                 200,
                 findings
         );
-        char grade = report.grade();
 
-        assertEquals('F', grade);
+        assertEquals('A', report.grade());
+    }
+
+    @Test
+    void gradeWhenScoreIsEighty() {
+
+        HeaderRule highRule = new HeaderRule(
+                "high-header",
+                Severity.HIGH,
+                "test description",
+                "test recommendation",
+                null
+        );
+
+        HeaderRule mediumRule = new HeaderRule(
+                "medium-header",
+                Severity.MEDIUM,
+                "test description",
+                "test recommendation",
+                null
+        );
+
+        HeaderRule lowRule = new HeaderRule(
+                "low-header",
+                Severity.LOW,
+                "test description",
+                "test recommendation",
+                null
+        );
+
+        List<HeaderFinding> findings = List.of(
+                new HeaderFinding(highRule, Status.OK, "value", "test"),
+                new HeaderFinding(highRule, Status.OK, "value", "test"),
+                new HeaderFinding(mediumRule, Status.OK, "value", "test"),
+                new HeaderFinding(lowRule, Status.OK, "value", "test")
+        );
+
+        ScanReport report = new ScanReport(
+                "https://example.com",
+                "https://example.com",
+                200,
+                findings
+        );
+
+        assertEquals('B', report.grade());
+    }
+
+    @Test
+    void gradeWhenScoreIsSeventy() {
+
+        HeaderRule highRule = new HeaderRule(
+                "high-header",
+                Severity.HIGH,
+                "test description",
+                "test recommendation",
+                null
+        );
+
+        HeaderRule lowRule = new HeaderRule(
+                "low-header",
+                Severity.LOW,
+                "test description",
+                "test recommendation",
+                null
+        );
+
+        List<HeaderFinding> findings = List.of(
+                new HeaderFinding(highRule, Status.OK, "value", "test"),
+                new HeaderFinding(highRule, Status.OK, "value", "test"),
+                new HeaderFinding(lowRule, Status.OK, "value", "test"),
+                new HeaderFinding(lowRule, Status.OK, "value", "test")
+        );
+
+        ScanReport report = new ScanReport(
+                "https://example.com",
+                "https://example.com",
+                200,
+                findings
+        );
+
+        assertEquals('C', report.grade());
+    }
+
+    @Test
+    void gradeWhenScoreIsSixty() {
+
+        HeaderRule rule = new HeaderRule(
+                "test-header",
+                Severity.HIGH,
+                "test description",
+                "test recommendation",
+                null
+        );
+
+        List<HeaderFinding> findings = List.of(
+                new HeaderFinding(rule, Status.OK, "value", "test"),
+                new HeaderFinding(rule, Status.OK, "value", "test")
+        );
+
+        ScanReport report = new ScanReport(
+                "https://example.com",
+                "https://example.com",
+                200,
+                findings
+        );
+
+        assertEquals('D', report.grade());
+    }
+
+    @Test
+    void gradeWhenScoreIsZero() {
+
+        List<HeaderFinding> findings = List.of();
+
+        ScanReport report = new ScanReport(
+                "https://example.com",
+                "https://example.com",
+                200,
+                findings
+        );
+
+        assertEquals('F', report.grade());
     }
 }

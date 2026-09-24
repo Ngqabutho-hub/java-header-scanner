@@ -1,3 +1,4 @@
+com\ngqabutho\headerscanner\render\ReportRendererTest.class
 com\ngqabutho\headerscanner\scan\EvaluatorTest.class
 com\ngqabutho\headerscanner\batch\BatchRunnerTest.class
 com\ngqabutho\headerscanner\batch\FakeScanHistoryRepository.class

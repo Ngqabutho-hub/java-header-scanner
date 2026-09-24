@@ -24,11 +24,13 @@ public class ReportRenderer {
                 builder.append(finding.rule().header()).append("\n");
                 builder.append("Status :\t").append(finding.status()).append("\n");
                 builder.append("Value :\t").append(finding.actualValue()).append("\n");
+                builder.append("\n");
             }
 
             builder.append("\n");
             builder.append("Score :\t").append(success.report().score()).append("\n");
             builder.append("Grade :\t").append(success.report().grade()).append("\n");
+
 
             return builder.toString();
 

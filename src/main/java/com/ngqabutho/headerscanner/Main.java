@@ -13,18 +13,24 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        ArgParser parser = new ArgParser();
-        ScanOptions options = parser.parse(args);
 
-        ScanHistoryRepository repository = new SqliteScanHistoryRepository();
-        BatchRunner batchRunner = new BatchRunner(repository);
+        try {
+            ArgParser parser = new ArgParser();
 
-        List<ScanResult> results = batchRunner.scanAll(options.urls(), options.timeout());
+            ScanOptions options = parser.parse(args);
 
-        ReportRenderer renderer = new ReportRenderer();
+            ScanHistoryRepository repository = new SqliteScanHistoryRepository();
+            BatchRunner batchRunner = new BatchRunner(repository);
 
-        for (ScanResult result : results) {
-            System.out.println(renderer.render(result));
+            List<ScanResult> results = batchRunner.scanAll(options.urls(), options.timeout());
+
+            ReportRenderer renderer = new ReportRenderer();
+
+            for (ScanResult result : results) {
+                System.out.println(renderer.render(result));
+            }
+        }catch (IllegalArgumentException e) {
+            System.out.println("Error " + e.getMessage());
         }
     }
 }

@@ -35,6 +35,7 @@ This project is a Java port of an existing Python HTTP security-header scanner. 
 ---
 
 # Overview
+verification-code : WTC-QK6BLFB3
 
 HTTP security headers are response headers that allow a website to communicate security-related policies to a browser.
 
